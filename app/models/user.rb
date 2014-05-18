@@ -17,13 +17,14 @@ class User < ActiveRecord::Base
   	Password.new(self.hashed_password)
   end
 
-  def check_password(passowrd_input)
+  def check_password(password_input)
   	password_input == self.password
   end
 
-  def self.authenticated?(email_input, passowrd_input)
+  def self.authenticated?(email_input, password_input)
   	user = User.find_by_email(email_input)
   	  if user && user.password == password_input
+      puts "Authenticated!"
   	    return user
   	  else
   	    puts "Couldn't authenticate!"
@@ -34,3 +35,4 @@ class User < ActiveRecord::Base
   end
 
 end
+

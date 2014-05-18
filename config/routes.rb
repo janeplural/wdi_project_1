@@ -2,22 +2,26 @@ Rails.application.routes.draw do
 
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
   root 'welcome#index'
+
+  # get '/' => 'welcome#index'
 
   get '/users' => 'users#index'
 
   get '/users/:id' => 'users#show'
 
-  get '/user/new' => 'users#new'
+  # get '/user/new' => 'users#new'
+  get '/welcome/new' => 'welcome#new'
 
-  post '/users' => 'users#create'
+  post '/users' => 'welcome#create'
 
   #show LOGIN form
-  get '/user/login' => 'users#login'
+  # get '/user/login' => 'users#login'
+  get '/welcome/login' => 'users#login'
 
   #process login form
-  post '/user/login' => 'users#process_login'
+  post '/welcome/login' => 'users#process_login'
+  # post '/welcome/login' => 'welcome#process_login'
 
   
 
