@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 before_action :authenticate_with_basic_auth
 
   def index
+   redirect_to "/users/#{@current_user.id}"
   end
 
   def login  
