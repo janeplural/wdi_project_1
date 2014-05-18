@@ -1,1 +1,33 @@
-<%= @hash["items"][0]["volumeInfo"]["title"] %>
+<%= form_tag do %>
+  <%= label_tag :author, "Author" %>
+  <%= text_field_tag :author %></br>
+  <%= label_tag :title, "title" %>
+  <%= text_field_tag :title %></br>
+  <%= label_tag :all_ebooks, "All eBooks" %>
+  <%= check_box_tag :all_ebooks %></br>
+  <%= submit_tag "Search" %>
+<% end %>
+
+  <%#= text_field_tag "author", nil, { placeholder: "email" } %>
+
+
+<%#= @hash["items"][0]["volumeInfo"]["title"] %>
+
+<%#= form_tag do %>
+  <%#= text_field_tag "author", nil, { placeholder: "email" } %>
+  <%#= text_field_tag "title", nil, { placeholder: "email" } %>
+  <%#= text_field_tag "", nil, { placeholder: "email" } %>
+
+  <%#=  submit_tag "Search" %>
+<%# end %>
+
+<%#= check_box_tag(:pet_dog) %>
+<%#= label_tag(:pet_dog, "I own a dog") %>
+<%#= check_box_tag(:pet_cat) %>
+<%#= label_tag(:pet_cat, "I own a cat") %>
+<!-- This generates the following:
+
+<input id="pet_dog" name="pet_dog" type="checkbox" value="1" />
+<label for="pet_dog">I own a dog</label>
+<input id="pet_cat" name="pet_cat" type="checkbox" value="1" />
+<label for="pet_cat">I own a cat</label> -->

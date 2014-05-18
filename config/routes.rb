@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   # post '/welcome/login' => 'welcome#process_login'
 
   get '/pieces' => 'pieces#index'
+  post '/pieces' => 'pieces#show'
 
   
 
