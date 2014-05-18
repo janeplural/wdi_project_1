@@ -37,42 +37,6 @@ before_action :authenticate_with_basic_auth
 
 		@hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=#{all_for_api}#{GOOGLEBOOKS_CLIENT_ID}")
 
-		x = 0
-		items = @hash["items"]
-		until x < items.length do
-
-		title = @hash["items"][x]["volumeInfo"]["title"]
-		title
-
-		subtitle = items[x]["volumeInfo"]["subtitle"]
-
-			if subtitle != nil 
-				subtitle 
-			end
-
-		if items[x]["volumeInfo"]["imageLinks"] != nil
-			thumbnail = items[x]["volumeInfo"]["imageLinks"]["thumbnail"]
-				<!-- 	puts x -->
-				thumbnail
-				<!-- else placeholder for "no image found" -->
-			end
-
-			type = items[x]["saleInfo"]["saleability"]
-				type
-
-			pub_date = items[x]["volumeInfo"]["publishedDate"]
-				pub_date
-
-			preview = items[x]["volumeInfo"]["previewLink"]
-				preview
-
-			description = items[x]["volumeInfo"]["description"] 
-				description
-
-			x += 1   
-
-			end 
-		# binding.pry
 	end
 
 end

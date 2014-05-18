@@ -1,11 +1,27 @@
-<%= form_tag do %>
-  <%= label_tag :author, "Author" %>
-  <%= text_field_tag :author %></br>
-  <%= label_tag :title, "title" %>
-  <%= text_field_tag :title %></br>
-  <%= label_tag :all_ebooks, "All eBooks" %>
-  <%= check_box_tag :all_ebooks %></br>
-  <%= submit_tag "Search" %>
+<% @hash["items"].each do |item| %>
+<% title = item["volumeInfo"]["title"] %>
+		<%= title %>
+
+<% if item["volumeInfo"].has_key?("subtitle") %>
+			<%= item["volumeInfo"]["subtitle"] %> 
 <% end %>
 
+	<% if item["volumeInfo"].has_key?("imageLinks") %>
+		<% thumbnail = item["volumeInfo"]["imageLinks"]["thumbnail"] %>
+		<%= image_tag("#{thumbnail}") %>
+		<!-- else placeholder for "no image found" -->
+	<% end %>
 
+	<% type = item["saleInfo"]["saleability"] %>
+		<%= type %>
+
+	<% pub_date = item["volumeInfo"]["publishedDate"] %>
+		<%= pub_date %>
+
+	<% preview = item["volumeInfo"]["previewLink"] %>
+		<%= link_to preview, "#{preview}" %>
+
+	<% description = item["volumeInfo"]["description"] %>
+		<%= description %> 
+
+<% end %>
