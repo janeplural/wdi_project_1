@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post '/welcome/login' => 'users#process_login'
   # post '/welcome/login' => 'welcome#process_login'
 
+  get '/pieces' => 'pieces#index'
+
   
 
   # The priority is based upon order of creation: first created -> highest priority.
