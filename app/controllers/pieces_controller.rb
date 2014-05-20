@@ -3,15 +3,13 @@ class PiecesController < ApplicationController
 before_action :authenticate_with_basic_auth
 
 	def index
-	  # working call from PRY
-	  # hash=JSON.parse(HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:edgar+allen+poe&filter=ebooks&AIzaSyDIsaNKi0OnG6D3koSpwkkj2rMDkCD53-M").body)
-
 	  # used this hardcoded variable to test my API all and ENV variable, SUCCESS!
 	  # @hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:edgar+allen+poe&filter=ebooks&#{GOOGLEBOOKS_CLIENT_ID}")
 	end
 
-	def show
+	def show 
 		#this array will be .joined and .flattened to be placed inside the @hash API call
+
 		all_searchterms = []
 	  #create variable to pass for api call, account for when text fields are empty.
 	  if params[:author] != nil
@@ -35,8 +33,51 @@ before_action :authenticate_with_basic_auth
 	  	all_for_api = all_searchterms.flatten.join('')
 	  end
 
-		@hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=#{all_for_api}#{GOOGLEBOOKS_CLIENT_ID}")
-
+		@google_hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=#{all_for_api}#{GOOGLEBOOKS_CLIENT_ID}")
+		# binding.pry
 	end
+
+	def create
+		# binding.pry
+		# render json: params[:title]
+		Piece.create(
+			title: params[:title],
+			subtitle: params[:subtitle], 
+			thumbnail: params[:thumbnail], 
+			cost: params[:cost], 
+			pub_date: params[:pub_date], 
+			preview: params[:preview], 
+			description: params[:description]
+		)
+		redirect_to "/users/#{current_user.id}"
+	end
+
+	# 	save_list.each do |piece|
+	# 		new_piece = Piece.new
+	# 		if piece.has_key?("title")
+	# 			new_piece.title = piece.title
+	# 		end
+	# 		if piece.has_key?("subtitle")
+	# 			new_piece.subtitle = piece.subtitle
+	# 		end
+	# 		if piece.has_key?("type")
+	# 			new_piece.type = piece.type
+	# 		end
+	# 		if piece.has_key?("thumbnail")
+	# 			new_piece.thumbnail = piece.thumbnail
+	# 		end
+	# 		if piece.has_key?("pub_date")
+	# 			new_piece.pub_date = piece.pub_date
+	# 		end
+	# 		if piece.has_key?("preview")
+	# 			new_piece.preview = piece.preview
+	# 		end
+	# 		if piece.has_key?("description")
+	# 			new_piece.description = piece.description
+	# 		end
+
+	# 		Piece.save
+	# 	end
+	# end
 
 end

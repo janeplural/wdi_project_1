@@ -26,6 +26,12 @@ Rails.application.routes.draw do
   get '/pieces' => 'pieces#index'
   post '/pieces' => 'pieces#show'
 
+  # get '/pieces/:title' => 'pieces#new'
+  # post '/pieces' => 'pieces#create'
+  # get '/pieces' => 'pieces#new'
+
+  post '/pieces/saved' => 'pieces#create'
+
   
 
   # The priority is based upon order of creation: first created -> highest priority.
