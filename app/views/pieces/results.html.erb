@@ -1,0 +1,39 @@
+<ul>
+	<% @google_hash["items"].each do |item| %>
+			<li>
+				<% if item["volumeInfo"].has_key?("imageLinks") %>
+					<% thumbnail = item["volumeInfo"]["imageLinks"]["thumbnail"] %>
+					<%= image_tag("#{thumbnail}") %>
+				<!-- else placeholder for "no image found" -->
+					<% else thumbnail = "nil" %>
+				<% end %>
+
+				<% title = item["volumeInfo"]["title"] %>
+						<%= title %></br>
+
+				<% if item["volumeInfo"].has_key?("subtitle") %>
+						<%= subtitle = item["volumeInfo"]["subtitle"] %></br>
+				<% else subtitle = "nil" %>
+				<% end %>
+
+				<% cost = item["saleInfo"]["saleability"] %>
+					<%= cost %></br>
+
+				<% if item["volumeInfo"].has_key?("publishedDate") %>
+				<% pub_date = item["volumeInfo"]["publishedDate"] %>
+				<% else pub_date = "nil" %>
+					<%= pub_date %></br>
+				<% end %>
+
+				<% preview = item["volumeInfo"]["previewLink"] %>
+					<%= link_to preview, "#{preview}" %></br>
+
+				<% if item["volumeInfo"].has_key?("description") %>
+					<%= description = item["volumeInfo"]["description"] %></br>
+					<% else description = "nil" %>
+				<% end %>
+			</li>
+
+			<%= link_to "save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
+	<% end %>
+</ul>

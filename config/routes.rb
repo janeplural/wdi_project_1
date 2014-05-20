@@ -23,16 +23,12 @@ Rails.application.routes.draw do
   post '/welcome/login' => 'users#process_login'
   # post '/welcome/login' => 'welcome#process_login'
 
-  get '/pieces' => 'pieces#index'
-  post '/pieces' => 'pieces#show'
+  get '/users/:id/pieces' => 'pieces#index'
+  post '/users/:id/pieces' => 'pieces#results'
 
-  # get '/pieces/:title' => 'pieces#new'
-  # post '/pieces' => 'pieces#create'
-  # get '/pieces' => 'pieces#new'
+  post '/users/:id/pieces/saved' => 'pieces#create'
 
-  post '/pieces/saved' => 'pieces#create'
-
-  
+  get '/users/:id/pieces/:id' => 'pieces#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

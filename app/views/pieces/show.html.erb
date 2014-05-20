@@ -1,39 +1,27 @@
-<ul>
-	<% @google_hash["items"].each do |item| %>
-			<li>
-				<% if item["volumeInfo"].has_key?("imageLinks") %>
-					<% thumbnail = item["volumeInfo"]["imageLinks"]["thumbnail"] %>
-					<%= image_tag("#{thumbnail}") %>
-				<!-- else placeholder for "no image found" -->
-					<% else thumbnail = "no thumbnail" %>
-				<% end %>
+hello world</br>
 
-				<% title = item["volumeInfo"]["title"] %>
-						<%= title %></br>
+<%= link_to "Back", "/users/#{current_user.id}" %></br>
 
-				<% if item["volumeInfo"].has_key?("subtitle") %>
-						<%= subtitle = item["volumeInfo"]["subtitle"] %></br>
-				<% else subtitle = "no subtitle" %>
-				<% end %>
+<%= @piece.title %></br>
 
-				<% cost = item["saleInfo"]["saleability"] %>
-					<%= cost %></br>
+<% if @piece.subtitle != nil %>
+	<%= @piece.subtitle %></br>
+<% end %>
 
-				<% if item["volumeInfo"].has_key?("publishedDate") %>
-				<% pub_date = item["volumeInfo"]["publishedDate"] %>
-				<% else pub_date = "no pub_date" %>
-					<%= pub_date %></br>
-				<% end %>
+<%= @piece.cost %></br>
 
-				<% preview = item["volumeInfo"]["previewLink"] %>
-					<%= link_to preview, "#{preview}" %></br>
+<% if @piece.thumbnail != nil %>
+	<%= image_tag("#{@piece.thumbnail}") %></br>
+<% end %>
 
-				<% if item["volumeInfo"].has_key?("description") %>
-					<%= description = item["volumeInfo"]["description"] %></br>
-					<% else description = "no description" %>
-				<% end %>
-			</li>
+<% if @piece.pub_date != nil %>
+	<%= @piece.pub_date %></br>
+<% end %>
 
-			<%= link_to "save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
-	<% end %>
-</ul>
+<%= link_to "Read Preview of #{@piece.title}", "#{@piece.preview}" %></br>
+
+<% if @piece.description != nil %>
+	<%= @piece.description %></br>
+<% end %>
+
+<%= link_to "Back", "/users/#{current_user.id}" %>

@@ -7,7 +7,7 @@ before_action :authenticate_with_basic_auth
 	  # @hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:edgar+allen+poe&filter=ebooks&#{GOOGLEBOOKS_CLIENT_ID}")
 	end
 
-	def show 
+	def results
 		#this array will be .joined and .flattened to be placed inside the @hash API call
 
 		all_searchterms = []
@@ -40,23 +40,62 @@ before_action :authenticate_with_basic_auth
 
 	def create
 		# render json: params[:title]
-		new_piece = Piece.create(
-			title: params[:title],
-			subtitle: params[:subtitle], 
-			thumbnail: params[:thumbnail], 
-			cost: params[:cost], 
-			pub_date: params[:pub_date], 
-			preview: params[:preview], 
-			description: params[:description]
-		)
+		existing_piece = Piece.find_by(
+				# title: piece_attributes[:title],
+				# subtitle: piece_attributes[:subtitle], 
+				# thumbnail: piece_attributes[:thumbnail], 
+				# cost: piece_attributes[:cost], 
+				# pub_date: piece_attributes[:pub_date], 
+				# preview: piece_attributes[:preview], 
+				# description: piece_attributes[:description]
+				title: params[:title],
+				subtitle: params[:subtitle], 
+				thumbnail: params[:thumbnail], 
+				cost: params[:cost], 
+				pub_date: params[:pub_date], 
+				preview: params[:preview], 
+				description: params[:description]
+				)
+ 		if existing_piece
+				Readr.create(
+				piece_id: existing_piece.id, 
+				user_id: current_user.id,
+				read: "false"
+				)
+		else 
+				new_piece = Piece.create(
+					# piece_attributes
+					title: params[:title],
+					subtitle: params[:subtitle], 
+					thumbnail: params[:thumbnail], 
+					cost: params[:cost], 
+					pub_date: params[:pub_date], 
+					preview: params[:preview], 
+					description: params[:description]
+				)
 
-		Readr.create(
-			piece_id: new_piece.id, 
-			user_id: current_user.id,
-			read: "false"
-			)
+				Readr.create(
+					piece_id: new_piece.id, 
+					user_id: current_user.id,
+					read: "false"
+					)
+			end
 
 		redirect_to "/users/#{current_user.id}"
 	end
+
+	def show
+		@piece = Piece.find(params[:id])
+	end
+
+	# private
+
+	# def piece_attributes
+	# 	binding.pry
+	# 	params.require(:piece).permit(				
+	# 		:title, :subtitle, :thumbnail, :cost, :pub_date, :preview, :description)
+		
+	# end
+
 
 end
