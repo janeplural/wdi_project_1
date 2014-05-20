@@ -37,10 +37,10 @@ before_action :authenticate_with_basic_auth
 		# binding.pry
 	end
 
+
 	def create
-		# binding.pry
 		# render json: params[:title]
-		Piece.create(
+		new_piece = Piece.create(
 			title: params[:title],
 			subtitle: params[:subtitle], 
 			thumbnail: params[:thumbnail], 
@@ -49,35 +49,14 @@ before_action :authenticate_with_basic_auth
 			preview: params[:preview], 
 			description: params[:description]
 		)
+
+		Readr.create(
+			piece_id: new_piece.id, 
+			user_id: current_user.id,
+			read: "false"
+			)
+
 		redirect_to "/users/#{current_user.id}"
 	end
-
-	# 	save_list.each do |piece|
-	# 		new_piece = Piece.new
-	# 		if piece.has_key?("title")
-	# 			new_piece.title = piece.title
-	# 		end
-	# 		if piece.has_key?("subtitle")
-	# 			new_piece.subtitle = piece.subtitle
-	# 		end
-	# 		if piece.has_key?("type")
-	# 			new_piece.type = piece.type
-	# 		end
-	# 		if piece.has_key?("thumbnail")
-	# 			new_piece.thumbnail = piece.thumbnail
-	# 		end
-	# 		if piece.has_key?("pub_date")
-	# 			new_piece.pub_date = piece.pub_date
-	# 		end
-	# 		if piece.has_key?("preview")
-	# 			new_piece.preview = piece.preview
-	# 		end
-	# 		if piece.has_key?("description")
-	# 			new_piece.description = piece.description
-	# 		end
-
-	# 		Piece.save
-	# 	end
-	# end
 
 end
