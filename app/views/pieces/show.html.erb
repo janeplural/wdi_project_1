@@ -29,3 +29,13 @@ hello world</br>
 <%= link_to "Back", "/users/#{current_user.id}" %>
 
 <%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => @piece.id }, { method: :post } %>
+
+<% if @readr.read == false %>
+
+	<%= link_to "Mark as Read.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "true" }, { method: :post } %>
+
+<% else %>
+
+	<%= link_to "Mark as Unread.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "false" }, { method: :post } %>
+
+<% end  %>

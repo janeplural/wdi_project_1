@@ -86,6 +86,10 @@ before_action :authenticate_with_basic_auth
 
 	def show
 		@piece = Piece.find(params[:id])
+		@readr =  Readr.find_by( 
+			user_id: current_user.id, 
+			piece_id: @piece.id 
+			) 
 	end
 
 
