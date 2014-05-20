@@ -88,6 +88,7 @@ before_action :authenticate_with_basic_auth
 		@piece = Piece.find(params[:id])
 	end
 
+
 	# private
 
 	# def piece_attributes

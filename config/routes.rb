@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post '/users/:id/pieces/saved' => 'pieces#create'
 
   get '/users/:id/pieces/:id' => 'pieces#show'
+  post '/users/:id/pieces/:id' => 'readrs#unsave_piece'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

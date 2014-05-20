@@ -2,6 +2,7 @@ hello world</br>
 
 <%= link_to "Back", "/users/#{current_user.id}" %></br>
 
+<div>
 <%= @piece.title %></br>
 
 <% if @piece.subtitle != nil %>
@@ -23,5 +24,8 @@ hello world</br>
 <% if @piece.description != nil %>
 	<%= @piece.description %></br>
 <% end %>
+</div>
 
 <%= link_to "Back", "/users/#{current_user.id}" %>
+
+<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => @piece.id }, { method: :post } %>
