@@ -1,6 +1,8 @@
 <h4><%= current_user.name %> |
 <%= current_user.email %></h4>
-<%= render partial: "userform", locals: { user: current_user } %>
+
+<%= link_to "Edit Account Info", add_userform_path, remote: true %>
+<%#= render partial: "userform", locals: { user: current_user } %>
 
 <p><%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %></p>
 

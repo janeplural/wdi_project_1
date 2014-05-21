@@ -10,6 +10,10 @@ before_action :authenticate_with_basic_auth
   end
 
   def show
+    # def add
+    #     render partial: "userform", locals: { user: current_user }
+    #   end
+    # end
   end
 
   def process_login
@@ -35,7 +39,7 @@ before_action :authenticate_with_basic_auth
     user = User.find("#{current_user.id}")
     user.update_attributes(user_attributes)
     
-    # redirect_to "/users/#{current_user.id}"
+    redirect_to "/users/#{current_user.id}"
   end
 
   private
