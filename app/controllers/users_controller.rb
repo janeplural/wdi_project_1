@@ -2,11 +2,6 @@ class UsersController < ApplicationController
 
 before_action :authenticate_with_basic_auth, except: [:new, :create]
 
-  # def logout
-  #   # current_user.id == nil
-  #   # redirect_to root
-  # end
-
   def index
    redirect_to "/users/#{@current_user.id}"
   end
@@ -31,8 +26,7 @@ before_action :authenticate_with_basic_auth, except: [:new, :create]
 
       if User.find_by_email(user.email) == nil
         user.save
-        #original code
-        # @current_user = user
+
         redirect_to "/users/#{user.id}"
       else
         render text: "Email is already taken!"
@@ -52,9 +46,8 @@ before_action :authenticate_with_basic_auth, except: [:new, :create]
 
     if @current_user
       # binding.pry
-      # id = current_user.id
-      redirect_to "/users/#{@current_user.id}"
-      # redirect_to user_path(current_user)
+      # redirect_to "/users/#{@current_user.id}"
+      redirect_to user_path(current_user.id)
     else
       render text: "Login Failed! Invalid email or password."
     end

@@ -1,33 +1,50 @@
-<h4><%= current_user.name %> |
-<%= current_user.email %></h4>
+<div class="section group">
+	<h4><%= current_user.name %> |
+	<%= current_user.email %></h4>
+</div>
 
-<%# PJ's way with restful routing $>
-<%#= link_to "Edit Account Info", add_userform_path, remote: true %>
-<%= render partial: "userform", locals: { user: current_user } %>
+<div class="section group">
+	<div class="col span_2_of_3">
+		<ul>
+			<% current_user.pieces.each do |piece| %>
+				<li> <%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
 
-<p><%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %></p>
+					<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
 
-<ul>
-	<% current_user.pieces.each do |piece| %>
-		<li> <%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
+					<% readr = Readr.find_by(user_id: current_user.id, piece_id: piece.id) %>
 
-<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
+					<% if readr.read == false %>
 
-<% readr = Readr.find_by(user_id: current_user.id, piece_id: piece.id) %>
+		<!-- can't figure out how to place font inside link_to -->
+						<i class="fa fa-check-circle-o"></i>
+						<%= link_to "Mark Read", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "true" }, { method: :post } %>
+				<%# end %>
 
-<% if readr.read == false %>
+		<!-- can't do this because it's not "flashing" just constantly there! -->
+				<%# flash[:notice] = "Marked as Read" %>
+				<%# flash.notice %>
 
-	<%= link_to "Mark as Read.", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "true" }, { method: :post } %>
+					<% else %>
 
-<% else %>
+						<i class="fa fa-check-circle"></i>
+						<%= link_to "Mark Unread", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "false" }, { method: :post } %>
+			<!-- 	<i class="fa fa-check-circle"></i>
+				<%# end %> -->
+				
+				<%# flash[:notice] = "Marked as Unread" %>
+				<%# flash.notice %>
 
-	<%= link_to "Mark as Unread.", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "false" }, { method: :post } %>
-
-<% end  %></br>
-			<%= image_tag("#{piece.thumbnail}") %>
-</li>
-	<% end %>
-</ul>
-
-	
+					<% end  %></br>
+					<%= image_tag("#{piece.thumbnail}") %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="col span_1_of_3">
+		<%= render partial: "userform", locals: { user: current_user } %></br>
+		<%# PJ's way with restful routing $>
+		<%#= link_to "Edit Account Info", add_userform_path, remote: true %>
+		<%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %></br>
+	</div>
+</div>
 

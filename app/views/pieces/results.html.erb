@@ -1,5 +1,3 @@
-<%= link_to "Back to profile", "/users/#{current_user.id}" %>
-
 <ul>
 	<% @google_hash["items"].each do |item| %>
 			<li>
@@ -36,7 +34,7 @@
 				<% end %>
 			</li>
 
-			<%= link_to "save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
+			Save <%= link_to "<i class="fa fa-book"></i>", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
 	<% end %>
 </ul>
 

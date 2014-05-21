@@ -3,15 +3,13 @@ class PiecesController < ApplicationController
 before_action :authenticate_with_basic_auth
 
 	def index
-	  # used this hardcoded variable to test my API all and ENV variable, SUCCESS!
-	  # @hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=inauthor:edgar+allen+poe&filter=ebooks&#{GOOGLEBOOKS_CLIENT_ID}")
 	end
 
 	def results
 		#this array will be .joined and .flattened to be placed inside the @hash API call
 
 		all_searchterms = []
-	  #create variable to pass for api call, account for when text fields are empty.
+		
 	  if params[:author] != nil
 	  	author_searchterms = params[:author].split.join("+")
 	  	author = "inauthor:#{author_searchterms}&"
@@ -20,13 +18,29 @@ before_action :authenticate_with_basic_auth
 
 	  if params[:title] != nil
 	  	title_searchterms = params[:title].split.join("+")
-	  	title = "intitle:#{author_searchterms}&"
+	  	title = "intitle:#{title_searchterms}&"
 	  	all_searchterms << title
 	  end
+	  
+	  if params[:subject] != nil
+	  	subject_searchterms = params[:subject].split.join("+")
+	  	subject = "subject:#{subject_searchterms}&"
+	  	all_searchterms << subject
+	  end
 
-	  if params[:all_ebooks] == 1
-	  	all_ebooks = "filter=ebooks&"
-	    all_searchterms << all_ebooks
+	  if params[:all_pieces] == 1
+	  	all_pieces = "filter=ebooks&"
+	    all_searchterms << all_pieces
+	  end
+
+  	if params[:free_pieces] == 1
+	  	free_pieces = "filter=free-ebooks&"
+	    all_searchterms << free_pieces
+	  end
+	  
+	  if params[:paid_pieces] == 1
+	  	paid_pieces = "filter=paid-ebooks&"
+	    all_searchterms << paid_pieces
 	  end
 
 	  if all_searchterms.length > 0

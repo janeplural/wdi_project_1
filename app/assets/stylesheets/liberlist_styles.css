@@ -1,0 +1,43 @@
+/*  GRID OF TWO   ============================================================================= */
+#headcontainer {
+	border: solid black 1px;
+}
+
+#current_userlinks {
+	float: right;
+}
+
+.span_3_of_3 {
+	width: 100%;
+  border: solid black 1px;
+}
+
+/* if you change the widths, do so equally: add the exact amount
+   you subtract from one column to the other column */
+.span_2_of_3 {
+	width: 66.1%;
+	border: solid black 1px;
+	float: left;
+}
+.span_1_of_3 {
+	width: 32.2%;
+  border: solid black 1px;
+  float: left;
+}
+
+
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.span_3_of_3 {
+		width: 100%;
+	}
+	.span_2_of_3 {
+		width: 100%;
+	}
+  .span_1_of_3 {
+    width: 100%;
+  }
+}
+}

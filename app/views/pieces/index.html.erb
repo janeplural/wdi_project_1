@@ -1,9 +1,21 @@
 <%= form_tag(controller: "pieces", action: "results", method: "post") do %>
   <%= label_tag :author, "Author" %>
   <%= text_field_tag :author %></br>
-  <%= label_tag :title, "title" %>
+
+  <%= label_tag :title, "Title" %>
   <%= text_field_tag :title %></br>
-  <%= label_tag :all_ebooks, "All eBooks" %>
-  <%= check_box_tag :all_ebooks %></br>
+
+  <%= label_tag :subject, "Subject" %>
+  <%= text_field_tag :subject %></br>
+ 
+  <%= check_box_tag :all_pieces %> 
+	<%= label_tag :all_pieces, "All eBooks" %>
+
+  <%= check_box_tag :free_pieces %>
+  <%= label_tag :free_pieces, "Free eBooks Only" %>
+
+  <%= check_box_tag :paid_pieces %>
+  <%= label_tag :paid_pieces, "Paid eBooks Only" %></br>
+
   <%= submit_tag "Search" %>
 <% end %>

@@ -1,14 +1,82 @@
 <!DOCTYPE html>
-<html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 <head>
-  <title>Eapoe</title>
+  <title>LiberList</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+    <!-- Responsive and mobile friendly stuff -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<%= yield %>
+<!-- <div id="skiptomain"><a href="#maincontent">skip to main content</a></div> -->
+
+<div id="wrapper">
+	<div id="headcontainer">
+		<header>
+		<% if current_user %>
+			<h1>My LiberList</h1>
+			<div id="current_userlinks"><%= link_to "Back to profile", user_path(current_user.id) %>
+
+			<%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %>
+		<% end %></div>
+		</header>
+	</div>
+	<div id="maincontentcontainer">
+		<div id="maincontent">
+
+			<div class="section group">
+			<h3>Two Columns</h3>
+			</div>
+
+<!-- 			<div class="section group">
+				<div class="col span_1_of_2_left">
+				1 of 2
+				</div>
+				<div class="col span_1_of_2_right">
+				1 of 2
+				</div>
+			</div> -->
+
+
+			<%= yield %>
+
+		</div>
+	</div>
+
+<br class="breaker" />
+
+			<div id="smallprint">
+			<span class="heart">&hearts;</span> Lovingly made in Newcastle upon Tyne.</span>
+			</div>
+
+		</footer>
+	</div>
+</div>
+
+
+
+	<!-- JavaScript at the bottom for fast page loading -->
+
+	 Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+
+	<!--[if (lt IE 9) & (!IEMobile)]>
+	<script src="js/selectivizr-min.js"></script>
+	<![endif]-->
+
+
+	<!-- More Scripts-->
+	<script src="js/responsivegridsystem.js"></script>
 
 </body>
 </html>
