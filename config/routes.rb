@@ -23,9 +23,12 @@ Rails.application.routes.draw do
   post '/welcome/login' => 'users#process_login'
   # post '/welcome/login' => 'welcome#process_login'
 
+  get '/users/:id/edit' => 'users#edit'
+  #patch '/users/:id' => 'users#update'
+
+  resources :users, only: [:update]
 
   get '/users/:id/pieces' => 'pieces#index'
-  # get '/pieces' => 'pieces#index'
   post '/users/:id/pieces' => 'pieces#results'
 
   post '/users/:id/pieces/saved' => 'pieces#create'

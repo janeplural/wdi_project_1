@@ -1,3 +1,5 @@
+<%= link_to "Back to profile", "/users/#{current_user.id}" %>
+
 <ul>
 	<% @google_hash["items"].each do |item| %>
 			<li>
@@ -37,3 +39,5 @@
 			<%= link_to "save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
 	<% end %>
 </ul>
+
+<%= link_to "Back to profile", "redirect_to /users/#{current_user.id}" %>

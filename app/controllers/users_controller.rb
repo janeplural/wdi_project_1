@@ -9,6 +9,9 @@ before_action :authenticate_with_basic_auth
   def login  
   end
 
+  def show
+  end
+
   def process_login
     email = params[:email]
     password = params[:password]
@@ -18,18 +21,28 @@ before_action :authenticate_with_basic_auth
       # binding.pry
       # id = current_user.id
       redirect_to "/users/#{@current_user.id}"
-      # redirect_to "/users/:id"
+      # redirect_to user_path(current_user)
     else
       render text: "Login Failed! Invalid email or password."
     end
   end
 
-  def show
-    #works for signup
-    # @user = User.find(params[:id])
-    #works for login
-     # cu_id = current_user.id
-     # @user = User.find(@current_user.id)
+  def edit
+    render partial: "userform", locals: { user: current_user }
   end
+
+  def update
+    user = User.find("#{current_user.id}")
+    user.update_attributes(user_attributes)
+    
+    # redirect_to "/users/#{current_user.id}"
+  end
+
+  private
+
+    def user_attributes
+      params.require(:user).permit(:name, :email)
+    end
+
 
 end

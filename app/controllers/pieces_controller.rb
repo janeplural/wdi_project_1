@@ -41,13 +41,6 @@ before_action :authenticate_with_basic_auth
 	def create
 		# render json: params[:title]
 		existing_piece = Piece.find_by(
-				# title: piece_attributes[:title],
-				# subtitle: piece_attributes[:subtitle], 
-				# thumbnail: piece_attributes[:thumbnail], 
-				# cost: piece_attributes[:cost], 
-				# pub_date: piece_attributes[:pub_date], 
-				# preview: piece_attributes[:preview], 
-				# description: piece_attributes[:description]
 				title: params[:title],
 				subtitle: params[:subtitle], 
 				thumbnail: params[:thumbnail], 
@@ -56,32 +49,43 @@ before_action :authenticate_with_basic_auth
 				preview: params[:preview], 
 				description: params[:description]
 				)
- 		if existing_piece
+# binding.pry
+	 	if existing_piece
+	 		if 
+				Readr.find_by(
+					piece_id: existing_piece.id,
+					user_id: current_user
+					)
+
+			render text: "You've already saved this book!"
+
+			else
 				Readr.create(
 				piece_id: existing_piece.id, 
 				user_id: current_user.id,
 				read: "false"
 				)
-		else 
-				new_piece = Piece.create(
-					# piece_attributes
-					title: params[:title],
-					subtitle: params[:subtitle], 
-					thumbnail: params[:thumbnail], 
-					cost: params[:cost], 
-					pub_date: params[:pub_date], 
-					preview: params[:preview], 
-					description: params[:description]
-				)
-
-				Readr.create(
-					piece_id: new_piece.id, 
-					user_id: current_user.id,
-					read: "false"
-					)
+			redirect_to "/users/#{current_user.id}"
 			end
+		else 
+			new_piece = Piece.create(
+				# piece_attributes
+				title: params[:title],
+				subtitle: params[:subtitle], 
+				thumbnail: params[:thumbnail], 
+				cost: params[:cost], 
+				pub_date: params[:pub_date], 
+				preview: params[:preview], 
+				description: params[:description]
+			)
 
-		redirect_to "/users/#{current_user.id}"
+			Readr.create(
+				piece_id: new_piece.id, 
+				user_id: current_user.id,
+				read: "false"
+				)
+			redirect_to "/users/#{current_user.id}"
+		end
 	end
 
 	def show
@@ -91,6 +95,15 @@ before_action :authenticate_with_basic_auth
 			piece_id: @piece.id 
 			) 
 	end
+
+	# existing_piece = Piece.find_by(
+	# title: piece_attributes[:title],
+	# subtitle: piece_attributes[:subtitle], 
+	# thumbnail: piece_attributes[:thumbnail], 
+	# cost: piece_attributes[:cost], 
+	# pub_date: piece_attributes[:pub_date], 
+	# preview: piece_attributes[:preview], 
+	# description: piece_attributes[:description])
 
 
 	# private

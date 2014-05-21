@@ -1,19 +1,24 @@
 <h4><%= current_user.name %> |
 <%= current_user.email %></h4>
+<%= render partial: "userform", locals: { user: current_user } %>
 
 <p><%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %></p>
 
-<%# User.find( @user.id ).pieces.each do |piece| %>
 <ul>
 	<% current_user.pieces.each do |piece| %>
-		<li> <%= link_to @piece.title, "/users/#{current_user.id}/pieces/#{@piece.id}" %></br>
-			<% if @readr.read == false %>
+		<li> <%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
 
-	<%= link_to "Mark as Read.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "true" }, { method: :post } %>
+<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
+
+<% readr = Readr.find_by(user_id: current_user.id, piece_id: piece.id) %>
+
+<% if readr.read == false %>
+
+	<%= link_to "Mark as Read.", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "true" }, { method: :post } %>
 
 <% else %>
 
-	<%= link_to "Mark as Unread.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "false" }, { method: :post } %>
+	<%= link_to "Mark as Unread.", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "false" }, { method: :post } %>
 
 <% end  %></br>
 			<%= image_tag("#{piece.thumbnail}") %>
