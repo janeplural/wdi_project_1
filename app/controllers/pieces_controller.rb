@@ -34,7 +34,9 @@ before_action :authenticate_with_basic_auth
 	  end
 
 		@google_hash=HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=#{all_for_api}#{GOOGLEBOOKS_CLIENT_ID}")
-		# binding.pry
+		# binding.pry	
+
+		# render "results"
 	end
 
 

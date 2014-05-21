@@ -4,37 +4,45 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  # get '/' => 'welcome#index'
+  # get '/' => 'users#logout'
 
-  get '/users' => 'users#index'
+  # get '/users' => 'users#index'
 
-  get '/users/:id' => 'users#show'
+  # get '/users/:id' => 'users#show'
 
-  # get '/user/new' => 'users#new'
-  get '/welcome/new' => 'welcome#new'
+  # # get '/user/new' => 'users#new'
+  # get '/users/new' => 'users#new'
 
-  post '/users' => 'welcome#create'
+  # post '/users' => 'users#create'
 
   #show LOGIN form
   # get '/user/login' => 'users#login'
-  get '/welcome/login' => 'users#login'
+  # get '/welcome/login' => 'users#login'
 
   #process login form
-  post '/welcome/login' => 'users#process_login'
+  # post '/welcome/login' => 'users#process_login'
   # post '/welcome/login' => 'welcome#process_login'
 
-  get '/users/:id/edit' => 'users#edit'
+  # get '/users/:id/edit' => 'users#edit'
   #patch '/users/:id' => 'users#update'
 
-  resources :users, only: [:update]
+  resources :users do 
+    resources :pieces
+  end
 
-  get '/users/:id/pieces' => 'pieces#index'
-  post '/users/:id/pieces' => 'pieces#results'
 
-  post '/users/:id/pieces/saved' => 'pieces#create'
+    # resources :pieces, only: [:show, :create]
 
-  get '/users/:id/pieces/:id' => 'pieces#show'
+  # get '/users/:id/pieces' => 'pieces#index'
+
+  post '/users/:user_id/results' => 'pieces#results'
+
+  # post '/users/:id/pieces/saved' => 'pieces#create'
+
+  # get '/users/:id/pieces/:id' => 'pieces#show'
+
   post '/users/:id/pieces/:id' => 'readrs#unsave_piece'
+
   post '/users/:id' => 'readrs#update'
 
 

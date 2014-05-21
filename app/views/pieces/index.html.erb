@@ -1,4 +1,4 @@
-<%= form_tag do %>
+<%= form_tag(controller: "pieces", action: "results", method: "post") do %>
   <%= label_tag :author, "Author" %>
   <%= text_field_tag :author %></br>
   <%= label_tag :title, "title" %>

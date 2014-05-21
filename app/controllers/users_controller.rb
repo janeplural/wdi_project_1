@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
-before_action :authenticate_with_basic_auth
+before_action :authenticate_with_basic_auth, except: [:new, :create]
+
+  # def logout
+  #   # current_user.id == nil
+  #   # redirect_to root
+  # end
 
   def index
    redirect_to "/users/#{@current_user.id}"
@@ -10,10 +15,34 @@ before_action :authenticate_with_basic_auth
   end
 
   def show
-    # def add
-    #     render partial: "userform", locals: { user: current_user }
-    #   end
-    # end
+  end
+
+  def new 
+   @user = User.new
+  end
+
+  def create
+    user_hash = params[:user]
+    if user_hash[:password] == user_hash[:password_confirmation]
+      user = User.new
+      user.password = user_hash[:password]
+      user.name = user_hash[:name]
+      user.email = user_hash[:email]
+
+      if User.find_by_email(user.email) == nil
+        user.save
+        #original code
+        # @current_user = user
+        redirect_to "/users/#{user.id}"
+      else
+        render text: "Email is already taken!"
+      end
+
+    else
+      render text: "Passwords did not match!"
+    end
+    #for testing
+    # render json: params 
   end
 
   def process_login
