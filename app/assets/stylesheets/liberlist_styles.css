@@ -39,6 +39,7 @@ font-family: 'Raleway', sans-serif;
 	padding: 3px;
 	border: solid black 1px;
   float: left;
+  display: inline-block;
 }
 .search_field_label {
 	font-size: 20px;
@@ -66,10 +67,12 @@ footer {
 }
 img{
 	float: left;
+	clear: right;
 	max-height: 192px;
-	margin: 0 auto;
 }
-
+p{
+	font-size: 14px;
+}
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
 
 @media only screen and (max-width: 480px) {

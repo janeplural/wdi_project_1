@@ -8,7 +8,7 @@
 				<div class="personal_piece"> 			
 					<%= image_tag("#{piece.thumbnail}") %></br>
 					
-					<%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
+					<p><%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
 
 					<% readr = Readr.find_by(user_id: current_user.id, piece_id: piece.id) %>
 
@@ -24,14 +24,13 @@
 					<% else %>
 						<i class="fa fa-check-circle"></i>
 						<%= link_to "Mark Unread", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "false" }, { method: :post } %>
-			<!-- 	<i class="fa fa-check-circle"></i>
 				<%# end %> -->
 				<%# flash[:notice] = "Marked as Unread" %>
 				<%# flash.notice %>
 					<% end %>
 					<%= link_to "Unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
 				</div>
-			<% end %>
+			<% end %></p>
 	</div>
 
 	<div class="col span_1_of_3">
