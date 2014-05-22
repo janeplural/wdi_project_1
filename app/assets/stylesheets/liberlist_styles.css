@@ -1,8 +1,10 @@
 /*  GRID OF TWO   ============================================================================= */
-/*body {
-	background-color: #cfbd00;
-}*/
 
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+body {
+font-family: 'Raleway', sans-serif;
+}
 
 #headcontainer {
 	border: solid black 1px;
@@ -34,6 +36,7 @@
 .personal_piece {
 	width: 150px;
 	height: 275px;
+	padding: 3px;
 	border: solid black 1px;
   float: left;
 }
@@ -64,6 +67,7 @@ footer {
 img{
 	float: left;
 	max-height: 192px;
+	margin: 0 auto;
 }
 
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */

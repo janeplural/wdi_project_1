@@ -10,8 +10,6 @@
 					
 					<%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
 
-					<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
-
 					<% readr = Readr.find_by(user_id: current_user.id, piece_id: piece.id) %>
 
 					<% if readr.read == false %>
@@ -31,6 +29,7 @@
 				<%# flash[:notice] = "Marked as Unread" %>
 				<%# flash.notice %>
 					<% end %>
+					<%= link_to "Unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
 				</div>
 			<% end %>
 	</div>
