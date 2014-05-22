@@ -8,12 +8,6 @@
 	border: solid black 1px;
 }
 
-/*#smallprint {
-	float: bottom;
-	width: 100%;
-  border: solid black 1px;
-}*/
-
 .span_3_of_3 {
 	width: 100%;
   border: solid black 1px;
@@ -56,5 +50,4 @@ footer {
   .span_1_of_3 {
     width: 100%;
   }
-}
 }
