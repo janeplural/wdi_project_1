@@ -1,13 +1,20 @@
-<ul>
-	<% @google_hash["items"].each do |item| %>
-			<li>
+<div class="section group">
+  <h2>Search Results</h2>
+</div>
+
+<div class="section group">
+	<div class="col span_3_of_3">
+		<% @google_hash["items"].each do |item| %>
+  	<div class="result">
+ 			<!-- <div id="result_image">	 -->
 				<% if item["volumeInfo"].has_key?("imageLinks") %>
 					<% thumbnail = item["volumeInfo"]["imageLinks"]["thumbnail"] %>
-					<%= image_tag("#{thumbnail}") %>
+							<%= image_tag("#{thumbnail}") %>
 				<!-- else placeholder for "no image found" -->
-					<% else thumbnail = "nil" %>
+				<% else thumbnail = "nil" %>
 				<% end %>
-
+			<!-- </div> -->
+			<!-- <div id="result_text"> -->
 				<% title = item["volumeInfo"]["title"] %>
 						<%= title %></br>
 
@@ -25,17 +32,20 @@
 					<%= pub_date %></br>
 				<% end %>
 
-				<% preview = item["volumeInfo"]["previewLink"] %>
-					<%= link_to preview, "#{preview}" %></br>
+				<!-- this font awesome doesn't feel like working -->
+				<i class="icon-external-link"></i><% preview = item["volumeInfo"]["previewLink"] %>
+					<%= link_to "preview", "#{preview}" %></br>
 
 				<% if item["volumeInfo"].has_key?("description") %>
 					<%= description = item["volumeInfo"]["description"] %></br>
 					<% else description = "nil" %>
 				<% end %>
-			</li>
 
-			<i class="fa fa-book"></i> <%= link_to "Save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
+				<i class="fa fa-book"></i> <%= link_to "Save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
+			<!-- </div> -->
+		</div>
 	<% end %>
-</ul>
+	</div>
+</div>
 
-<%= link_to "Back to profile", "redirect_to /users/#{current_user.id}" %>
+<p><%= link_to "Back to profile", "redirect_to /users/#{current_user.id}" %></p>

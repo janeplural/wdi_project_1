@@ -1,41 +1,44 @@
-hello world</br>
+<div class="section group">
+	<h2><%= @piece.title %></h2>
 
-<%= link_to "Back", "/users/#{current_user.id}" %></br>
+	<% if @piece.subtitle != nil %>
+		<h4><%= @piece.subtitle %></h4>
+	<% end %>
 
-<div>
-<%= @piece.title %></br>
-
-<% if @piece.subtitle != nil %>
-	<%= @piece.subtitle %></br>
-<% end %>
-
-<%= @piece.cost %></br>
-
-<% if @piece.thumbnail != nil %>
-	<%= image_tag("#{@piece.thumbnail}") %></br>
-<% end %>
-
-<% if @piece.pub_date != nil %>
-	<%= @piece.pub_date %></br>
-<% end %>
-
-<%= link_to "Read Preview of #{@piece.title}", "#{@piece.preview}" %></br>
-
-<% if @piece.description != nil %>
-	<%= @piece.description %></br>
-<% end %>
+	<h5><%= @piece.cost %></h5>
 </div>
 
-<%= link_to "Back", "/users/#{current_user.id}" %>
+<div class="section group">
+	<div class="col span_3_of_3">
+		<div class="show_piece">
+			<% if @piece.thumbnail != nil %>
+				<%= image_tag("#{@piece.thumbnail}") %></br>
+			<% end %>
 
-<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => @piece.id }, { method: :post } %>
+			<% if @piece.pub_date != nil %>
+				<h5>Published Date</h5><%= @piece.pub_date %></br>
+			<% end %>
 
-<% if @readr.read == false %>
+			<i class="icon-external-link"></i><%= link_to "Read Preview of #{@piece.title}", "#{@piece.preview}" %></br>
 
-	<%= link_to "Mark as Read.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "true" }, { method: :post } %>
+			<% if @piece.description != nil %>
+				<h5>Description</h5><%= @piece.description %></br>
+			<% end %>
+			</div>
 
-<% else %>
+			<%= link_to "Back", "/users/#{current_user.id}" %>
 
-	<%= link_to "Mark as Unread.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "false" }, { method: :post } %>
+			<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => @piece.id }, { method: :post } %>
 
-<% end  %>
+			<% if @readr.read == false %>
+
+				<%= link_to "Mark as Read.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "true" }, { method: :post } %>
+
+			<% else %>
+
+				<%= link_to "Mark as Unread.", {:controller => "readrs", :action => "update", :piece_id => @piece.id, :read => "false" }, { method: :post } %>
+
+			<% end %>
+		</div>
+	</div>
+</div>

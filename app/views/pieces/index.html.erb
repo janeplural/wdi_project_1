@@ -4,26 +4,26 @@
 
 <div class="section group">
   <div class="col span_2_of_3">
-    <%= form_tag(controller: "pieces", action: "results", method: "post") do %>
-      <%= label_tag :author, "Author" %>
-      <%= text_field_tag :author %></br>
+    <%= form_tag({controller: "pieces", action: "results", method: "post"}, {:class => 'search_form'}) do %>
+      <%= label_tag :author, "Author", :class => "search_field_label" %>
+      <%= text_field_tag :author, nil, :class => "search_field_form" %></br>
 
-      <%= label_tag :title, "Title" %>
-      <%= text_field_tag :title %></br>
+      <%= label_tag :title, "Title", :class => "search_field_label" %>
+      <%= text_field_tag :title, nil, :class => "search_field_form"  %></br>
 
-      <%= label_tag :subject, "Subject" %>
-      <%= text_field_tag :subject %></br>
+      <%= label_tag :subject, "Subject", :class => "search_field_label" %>
+      <%= text_field_tag :subject, nil, :class => "search_field_form"  %></br>
      
       <%= check_box_tag :all_pieces %> 
-    	<%= label_tag :all_pieces, "All eBooks" %>
+    	<%= label_tag :all_pieces, "All eBooks", :class => "check_box_label"   %>
 
       <%= check_box_tag :free_pieces %>
-      <%= label_tag :free_pieces, "Free eBooks Only" %>
+      <%= label_tag :free_pieces, "Free eBooks Only", :class => "check_box_label" %>
 
       <%= check_box_tag :paid_pieces %>
-      <%= label_tag :paid_pieces, "Paid eBooks Only" %></br>
+      <%= label_tag :paid_pieces, "Paid eBooks Only", :class => "check_box_label" %></br>
 
-      <%= submit_tag "Search" %>
+      <%= submit_tag "Search", :class => "search_submit"  %>
     <% end %>
   </div>
 </div>

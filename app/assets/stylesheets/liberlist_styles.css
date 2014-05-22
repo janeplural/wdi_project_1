@@ -1,4 +1,9 @@
 /*  GRID OF TWO   ============================================================================= */
+/*body {
+	background-color: #cfbd00;
+}*/
+
+
 #headcontainer {
 	border: solid black 1px;
 }
@@ -32,10 +37,33 @@
 	border: solid black 1px;
   float: left;
 }
-
+.search_field_label {
+	font-size: 20px;
+}
+.search_field_form {
+	width: 200px;
+	height: 20px;
+}
+.check_box_label {
+	font-size: 18px;
+}
+.search_submit {
+	width: 200px;
+}
+.result{
+min-height: 200px;
+border: solid green 1px;
+}
+.show_piece {
+	min-height: 500px;
+}
 footer {
 	position: absolute; 
 	bottom: 0;
+}
+img{
+	float: left;
+	max-height: 192px;
 }
 
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
@@ -51,3 +79,4 @@ footer {
     width: 100%;
   }
 }
+
