@@ -5,7 +5,14 @@
 
 #current_userlinks {
 	float: right;
+	border: solid black 1px;
 }
+
+/*#smallprint {
+	float: bottom;
+	width: 100%;
+  border: solid black 1px;
+}*/
 
 .span_3_of_3 {
 	width: 100%;
@@ -23,9 +30,19 @@
 	width: 32.2%;
   border: solid black 1px;
   float: left;
+  margin-left: 15px;
+}
+.personal_piece {
+	width: 150px;
+	height: 275px;
+	border: solid black 1px;
+  float: left;
 }
 
-
+footer {
+	position: absolute; 
+	bottom: 0;
+}
 
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
 

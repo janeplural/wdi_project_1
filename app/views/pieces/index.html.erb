@@ -1,21 +1,29 @@
-<%= form_tag(controller: "pieces", action: "results", method: "post") do %>
-  <%= label_tag :author, "Author" %>
-  <%= text_field_tag :author %></br>
+<div class="section group">
+  <h2>Search eBooks</h2>
+</div>
 
-  <%= label_tag :title, "Title" %>
-  <%= text_field_tag :title %></br>
+<div class="section group">
+  <div class="col span_2_of_3">
+    <%= form_tag(controller: "pieces", action: "results", method: "post") do %>
+      <%= label_tag :author, "Author" %>
+      <%= text_field_tag :author %></br>
 
-  <%= label_tag :subject, "Subject" %>
-  <%= text_field_tag :subject %></br>
- 
-  <%= check_box_tag :all_pieces %> 
-	<%= label_tag :all_pieces, "All eBooks" %>
+      <%= label_tag :title, "Title" %>
+      <%= text_field_tag :title %></br>
 
-  <%= check_box_tag :free_pieces %>
-  <%= label_tag :free_pieces, "Free eBooks Only" %>
+      <%= label_tag :subject, "Subject" %>
+      <%= text_field_tag :subject %></br>
+     
+      <%= check_box_tag :all_pieces %> 
+    	<%= label_tag :all_pieces, "All eBooks" %>
 
-  <%= check_box_tag :paid_pieces %>
-  <%= label_tag :paid_pieces, "Paid eBooks Only" %></br>
+      <%= check_box_tag :free_pieces %>
+      <%= label_tag :free_pieces, "Free eBooks Only" %>
 
-  <%= submit_tag "Search" %>
-<% end %>
+      <%= check_box_tag :paid_pieces %>
+      <%= label_tag :paid_pieces, "Paid eBooks Only" %></br>
+
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+</div>

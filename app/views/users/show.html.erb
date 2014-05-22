@@ -1,13 +1,14 @@
 <div class="section group">
-	<h4><%= current_user.name %> |
-	<%= current_user.email %></h4>
+	<h2>Welcome <%= current_user.name %></h2>
 </div>
 
 <div class="section group">
 	<div class="col span_2_of_3">
-		<ul>
-			<% current_user.pieces.each do |piece| %>
-				<li> <%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
+				<% current_user.pieces.each do |piece| %>
+				<div class="personal_piece"> 			
+					<%= image_tag("#{piece.thumbnail}") %></br>
+					
+					<%= link_to piece.title, "/users/#{current_user.id}/pieces/#{piece.id}" %></br>
 
 					<%= link_to "unsave", {:controller => "readrs", :action => "unsave_piece", :piece_id => piece.id }, { method: :post } %>
 
@@ -15,36 +16,31 @@
 
 					<% if readr.read == false %>
 
-		<!-- can't figure out how to place font inside link_to -->
+			<!-- can't figure out how to place font inside link_to -->
 						<i class="fa fa-check-circle-o"></i>
 						<%= link_to "Mark Read", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "true" }, { method: :post } %>
-				<%# end %>
-
-		<!-- can't do this because it's not "flashing" just constantly there! -->
-				<%# flash[:notice] = "Marked as Read" %>
-				<%# flash.notice %>
-
+					<%# end %>
+			<!-- can't do this because it's not "flashing" just constantly there! -->
+					<%# flash[:notice] = "Marked as Read" %>
+					<%# flash.notice %>
 					<% else %>
-
 						<i class="fa fa-check-circle"></i>
 						<%= link_to "Mark Unread", {:controller => "readrs", :action => "update", :piece_id => piece.id, :read => "false" }, { method: :post } %>
 			<!-- 	<i class="fa fa-check-circle"></i>
 				<%# end %> -->
-				
 				<%# flash[:notice] = "Marked as Unread" %>
 				<%# flash.notice %>
-
-					<% end  %></br>
-					<%= image_tag("#{piece.thumbnail}") %>
-				</li>
+					<% end %>
+				</div>
 			<% end %>
-		</ul>
 	</div>
+
 	<div class="col span_1_of_3">
-		<%= render partial: "userform", locals: { user: current_user } %></br>
+		<p><%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %><p></div>
+
+		<div class="col span_1_of_3"><p><%= render partial: "userform", locals: { user: current_user } %></p>
 		<%# PJ's way with restful routing $>
 		<%#= link_to "Edit Account Info", add_userform_path, remote: true %>
-		<%= link_to "search ebooks", "/users/#{current_user.id}/pieces" %></br>
 	</div>
 </div>
 

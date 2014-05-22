@@ -34,7 +34,7 @@
 				<% end %>
 			</li>
 
-			Save <%= link_to "<i class="fa fa-book"></i>", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
+			<i class="fa fa-book"></i> <%= link_to "Save", {:controller => "pieces", :action => "create", :title => title, :subtitle => subtitle, :thumbnail=> thumbnail, :cost => cost, :pub_date => pub_date, :preview => preview, :description => description}, { method: :post } %>
 	<% end %>
 </ul>
 
